@@ -25,3 +25,24 @@ function validateInput(value) {
     // Si pasa todas las validaciones anteriores, el valor es válido
     return true;
 }
+
+// Valida si un valor está dentro de un rango razonable
+function validateRange(value, category) {
+    switch (category) {
+        case 'temperature':
+            // Validar si la temperatura está dentro de un rango razonable
+            // No se permiten temperaturas por debajo de -273.15 (cero absoluto) y un límite superior arbitrario (1 millón)
+            return value >= -273.15 && value <= 1e6;
+
+        case 'length':
+        case 'weight':
+        case 'volume':
+            // Para las categorías de longitud, peso y volumen, solo se permiten valores positivos
+            // Ya que estas medidas físicas no pueden ser negativas
+            return value >= 0;
+
+        default:
+            // Si la categoría no es reconocida, devolver true (no aplicar restricciones de rango)
+            return true;
+    }
+}
