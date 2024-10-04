@@ -71,4 +71,27 @@ function performConversion() {
     addToHistory(value, from, to, result);               // se agrega la conversión a la lista de historial
 }
 
+// Agregar al historial
+function addToHistory(fromVal, fromUnit, toUnit, toVal) {
+    // Crear elemento para el historial
+    const historyItem = document.createElement('li');
+    historyItem.className = 'list-group-item';  // se agrega una clase para darle estilos
+    historyItem.textContent = `${fromVal} ${fromUnit} = ${toVal.toFixed(4)} ${toUnit}`;  //  se agrega el contenido del <li> con la conversión realizada
+    
+    // Mantener solo los últimos 5 items
+    if (historyList.children.length >= 5) {
+        historyList.removeChild(historyList.lastChild);     // si ya hay 5 o más elementos en la lista, eliminar el último
+    }
+    
+    historyList.insertBefore(historyItem, historyList.firstChild);  // agregar el <li> como primer elemento de la lista
+}
 
+// Intercambiar unidades
+function switchUnits() {
+    const tempUnit = fromUnit.value;     // guarda temporalmente el valor de la unidad de origen
+    fromUnit.value = toUnit.value;       //se asigna el valor de la unidad de destino a la unidad de origen
+    toUnit.value = tempUnit;             // se asigna el valor temporal de la unidad de origen a la unidad de destino
+    performConversion();                // se realiza la conversión de acuerdo a las nuevas unidades intercambiadas
+}
+
+document.addEventListener('DOMContentLoaded', init);  // se inicializa el conversor al cargar el DOM totalmente
