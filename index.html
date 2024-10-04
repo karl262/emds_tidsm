@@ -10,7 +10,73 @@
 </head>
 
 <body>
-    
+    <div class="container mt-5">
+        <h1 class="text-center mb-4 text-dark">Conversor de Unidades</h1>
+        
+        <div class="card bg-primary text-light">
+            <div class="card-body">
+                <form id="converterForm">
+                    <!-- select para elegir la categoría -->
+                    <div class="mb-3">
+                        <label for="category" class="form-label">Categoría</label>
+                        <select class="form-select" id="category">
+                            <option value="length">Longitud</option>
+                            <option value="weight">Peso</option>
+                            <option value="temperature">Temperatura</option>
+                            <option value="volume">Volumen</option>
+                        </select>
+                    </div>
+
+                    <div class="row text-light">
+                        <!-- div para la unidad base  -->
+                        <div class="col-md-5">
+                            <div class="mb-3">
+                                <label for="fromValue" class="form-label">Valor</label>
+                                <input type="number" class="form-control" id="fromValue">
+                            </div>
+                            <div class="mb-3">
+                                <label for="fromUnit" class="form-label">Desde</label>
+                                <select class="form-select" id="fromUnit"></select>
+                            </div>
+                        </div>
+
+                        <!-- div para el ícono de intercambio -->
+                        <div class="col-md-2 d-flex align-items-center justify-content-center text-light">
+                            <button type="button" class="btn btn-outline-warning" id="switchIcon">
+                                ⇄
+                            </button>
+                        </div>
+
+                        <!-- div para la unidad resultante -->
+                        <div class="col-md-5 text-light">
+                            <div class="mb-3">
+                                <label for="toValue" class="form-label">Resultado</label>
+                                <input type="number" class="form-control" id="toValue" readonly>
+                            </div>
+                            <div class="mb-3 text-light">
+                                <label for="toUnit" class="form-label">A</label>
+                                <select class="form-select" id="toUnit"></select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- div para la lista de historial de conversiones -->
+        <div class="card mt-4 bg-primary text-light">
+            <div class="card-header">
+                Historial de Conversiones
+            </div>
+            <div class="card-body text-light">
+                <ul class="list-group" id="historyList"></ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/validators.js"></script>
+    <script src="js/converters.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
