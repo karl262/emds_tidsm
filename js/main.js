@@ -28,3 +28,26 @@ function init() {
     updateUnitSelectors();                                 // se actualizan las unidades
 }
 
+function updateUnitSelectors() {
+    // Obtener categoría seleccionada
+    const category = categorySelect.value; 
+    const categoryUnits = units[category];
+    
+    // Limpiar selectores
+    fromUnit.innerHTML = '';
+    toUnit.innerHTML = '';
+    
+    // Poblar selectores con las unidades de la categoría
+    categoryUnits.forEach(unit => {
+        fromUnit.add(new Option(unit, unit));
+        toUnit.add(new Option(unit, unit));
+    });
+    
+    // Establecer valores por defecto diferentes para cada categoría
+    if (categoryUnits.length > 1) {
+        toUnit.selectedIndex = 1;
+    }
+    
+    performConversion();    // se realiza la conversión
+}
+
