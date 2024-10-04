@@ -46,3 +46,18 @@ function validateRange(value, category) {
             return true;
     }
 }
+
+// Validación de precisión decimal
+function validatePrecision(value) {
+    // Convertir el valor a una cadena y dividirlo en dos partes: antes y después del punto decimal
+    const decimals = value.toString().split('.')[1];
+    
+    // Si existe una parte decimal y tiene más de 10 decimales, retornar false (inválido)
+    if (decimals && decimals.length > 10) {
+        return false;
+    }
+    
+    // Si no hay más de 10 decimales, el valor es válido y se retorna true
+    return true;
+}
+
