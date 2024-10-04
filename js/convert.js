@@ -50,5 +50,43 @@ const conversionFactors = {
     }
 };
 
+// Funciones especiales para temperatura
+const temperatureConversions = {
+    // Conversiones desde Celsius a otras unidades de temperatura
+    Celsius: {
+        // Convertir de Celsius a Fahrenheit
+        Fahrenheit: (c) => (c * 9/5) + 32, // Fórmula: (°C × 9/5) + 32
+        // Convertir de Celsius a Kelvin
+        Kelvin: (c) => c + 273.15          // Fórmula: °C + 273.15
+    },
+    // Conversiones desde Fahrenheit a otras unidades de temperatura
+    Fahrenheit: {
+        // Convertir de Fahrenheit a Celsius
+        Celsius: (f) => (f - 32) * 5/9,    // Fórmula: (°F - 32) × 5/9
+        // Convertir de Fahrenheit a Kelvin
+        Kelvin: (f) => (f - 32) * 5/9 + 273.15 // Fórmula: (°F - 32) × 5/9 + 273.15
+    },
+    // Conversiones desde Kelvin a otras unidades de temperatura
+    Kelvin: {
+        // Convertir de Kelvin a Celsius
+        Celsius: (k) => k - 273.15,        // Fórmula: K - 273.15
+        // Convertir de Kelvin a Fahrenheit
+        Fahrenheit: (k) => (k - 273.15) * 9/5 + 32 // Fórmula: (K - 273.15) × 9/5 + 32
+    }
+};
 
+// Función principal de conversión
+function convert(value, fromUnit, toUnit, category) {
+    // Si la unidad de origen es igual a la unidad de destino, no es necesario convertir, retornar el mismo valor
+    if (fromUnit === toUnit) return value;
+    
+    // Si la categoría es 'temperature', usar las funciones especiales para la conversión de temperatura
+    if (category === 'temperature') {
+        // Retornar el resultado de la conversión utilizando las funciones definidas en `temperatureConversions`
+        return temperatureConversions[fromUnit][toUnit](value);
+    }
+    
+    // Para otras categorías, como longitud, peso o volumen, usar factores de conversión estándar
+    return convertWithFactors(value, fromUnit, toUnit, category);
+}
 
