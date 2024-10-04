@@ -51,3 +51,24 @@ function updateUnitSelectors() {
     performConversion();    // se realiza la conversión
 }
 
+// Realizar conversión
+function performConversion() {  
+    if (!validateInput(fromValue.value)) {  // validar datos de entrada
+        toValue.value = '';                  // si el valor no es válido se limpia y no se hace la conversión
+        return;
+    }
+
+    const value = parseFloat(fromValue.value);  // convierte a flotante el numero de entrada
+
+    // Obtener las unidades seleccionadas
+    const category = categorySelect.value;
+    const from = fromUnit.value;
+    const to = toUnit.value;
+
+    const result = convert(value, from, to, category);  // se realiza la conversión pasando el valor para obtener el resultado
+    toValue.value = result.toFixed(4);                  // se redondea el resultado a 4 decimales
+    
+    addToHistory(value, from, to, result);               // se agrega la conversión a la lista de historial
+}
+
+
